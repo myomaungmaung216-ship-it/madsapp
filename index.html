@@ -3,34 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch & Earn</title>
+    <title>WTH ADGRAM - Watch & Earn</title>
+    
     <script src="https://sad.adsgram.ai/js/adsgram-stream.js"></script>
+    
     <style>
-        body { font-family: sans-serif; text-align: center; padding-top: 50px; background-color: #f4f7f6; }
-        .card { background: white; padding: 30px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 80%; max-width: 400px; }
-        button { background-color: #FF9800; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 20px; }
-        button:active { transform: scale(0.95); }
-        .score-box { background: #e1f5fe; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-        .points-text { font-size: 30px; font-weight: bold; color: #0277bd; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding-top: 30px; }
+        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 90%; max-width: 400px; text-align: center; }
+        .score-box { background: #e1f5fe; padding: 20px; border-radius: 15px; margin-bottom: 25px; border: 1px solid #b3e5fc; }
+        .points-text { font-size: 45px; font-weight: bold; color: #0277bd; }
+        
+        /* ကြော်ငြာကြည့်ရန် ခလုတ် */
+        .btn-watch-ad { background-color: #FF9800; color: white; border: none; padding: 16px; border-radius: 12px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer; }
+        .btn-watch-ad:active { transform: scale(0.98); }
+        
+        .status-note { font-size: 11px; color: #4caf50; font-weight: bold; margin-bottom: 15px; }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <h2>MAdsgram App</h2>
+        <h2 style="color: #333; margin-bottom: 5px;">WTH ADGRAM</h2>
+        <p class="status-note">● Watch Ads to Earn Coins</p>
         
         <div class="score-box">
-            <div style="font-size: 14px; color: #546e7a;">သင့်လက်ရှိရမှတ်</div>
+            <div style="font-size: 12px; color: #546e7a; margin-bottom: 5px; text-transform: uppercase;">TOTAL BALANCE</div>
             <div id="pointsDisplay" class="points-text">0</div>
             <div style="font-size: 12px; color: #0277bd;">Points</div>
         </div>
 
-        <p>ကြော်ငြာကြည့်ပြီး Point များ ရယူပါ</p>
-        <button onclick="watchAd()">📺 ကြော်ငြာကြည့်မည်</button>
+        <button class="btn-watch-ad" onclick="watchAd()">📺 ကြော်ငြာကြည့်မည်</button>
     </div>
 
     <script>
-        // ဖုန်းမှာ Point သိမ်းထားဖို့ ကုဒ်
-        const STORAGE_KEY_POINTS = 'my_points';
+        // ဖုန်းမှာ Point မှတ်ထားမယ့် စနစ်
+        const STORAGE_KEY_POINTS = 'wth_points_fixed';
         let points = parseInt(localStorage.getItem(STORAGE_KEY_POINTS)) || 0;
         
         function updateUI() {
@@ -39,21 +46,23 @@
         
         updateUI();
 
+        // ကြော်ငြာပြသမယ့် လုပ်ဆောင်ချက်
         function watchAd() {
-            // သင့်ရဲ့ Block ID အသစ် ၂၆၃၆၄ ကို ဒီမှာ ထည့်ထားပါတယ်
-            const AdController = window.Adsgram.init({ blockId: "26364" });
+            // blockId မှာ ၂၆၃၆၄ ထည့်ထားပြီး စမ်းသပ်ဖို့ debug: true ဖွင့်ထားပါတယ်
+            const AdController = window.Adsgram.init({ blockId: "26364", debug: true });
             
             AdController.show().then((result) => {
-                // ကြော်ငြာကြည့်တာ ပြီးဆုံးရင် Point ၁၀ မှတ် ပေါင်းပေးမယ်
+                // ကြော်ငြာကြည့်တာ အောင်မြင်ရင် Point ၁၀ မှတ်တိုးမယ်
                 points += 10;
                 localStorage.setItem(STORAGE_KEY_POINTS, points);
                 updateUI();
-                alert("ကျေးဇူးတင်ပါတယ်။ Point ၁၀ မှတ် ရရှိပါပြီ!");
+                alert("ကျေးဇူးတင်ပါတယ်။ Points ၁၀ မှတ် ရရှိပါပြီ!");
             }).catch((err) => {
-                alert("ကြော်ငြာပြသရန် အဆင်မပြေသေးပါ။ ခဏနေမှ ထပ်ကြိုးစားကြည့်ပါဗျ။");
+                alert("ကြော်ငြာပြသရန် အဆင်မပြေသေးပါ။ ခဏနေမှ ထပ်စမ်းကြည့်ပါ။");
                 console.error(err);
             });
         }
     </script>
+
 </body>
 </html>
