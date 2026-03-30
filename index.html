@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch & Earn</title>
+    <script src="https://sad.adsgram.ai/js/adsgram-stream.js"></script>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; background-color: #f4f7f6; }
+        .card { background: white; padding: 30px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        button { background-color: #FF9800; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>MAdsgram App</h2>
+        <p>ကြော်ငြာကြည့်ပြီး Point များ ရယူပါ</p>
+        <button onclick="watchAd()">ကြော်ငြာကြည့်မည်</button>
+    </div>
+
+    <script>
+        function watchAd() {
+            // အခုက Test platform နဲ့ စမ်းမှာမို့လို့ ကုဒ် ဒီအတိုင်း ထားလို့ရပါတယ်
+            const AdController = window.Adsgram.init({ blockId: "26359" });
+            
+            AdController.show().then((result) => {
+                alert("ကြော်ငြာကြည့်တာ ပြီးဆုံးပါပြီ။");
+            }).catch((err) => {
+                alert("ကြော်ငြာပြသရန် အဆင်မပြေသေးပါ။");
+            });
+        }
+    </script>
+</body>
+</html>
+
